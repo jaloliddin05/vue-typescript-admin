@@ -1,6 +1,6 @@
-<template>Hello</template>
-
-<script></script>
+<template>
+  <div>Type detail</div>
+</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
