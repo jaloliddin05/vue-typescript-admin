@@ -1,14 +1,17 @@
+import { Type } from '../../models';
 export interface TypeStateInterface {
-  types: any;
-  typeDeteil: any;
-  count: number;
+  types: Type[];
+  typeDetail: Type | null;
+  typeCreateModal: boolean;
+  typeUpdateModal: boolean;
 }
 
 function state() {
   return {
-    types: null,
-    typeDeteil: null,
-    count: 5,
+    types: [],
+    typeDetail: null,
+    typeCreateModal: false,
+    typeUpdateModal: false,
   };
 }
 

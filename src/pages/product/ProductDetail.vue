@@ -1,5 +1,8 @@
 <template>
-  <div>Product detail</div>
+  <div>
+    <go-back></go-back>
+    <p>Product detail</p>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as api from './api.service';
+import { CreateTypeDto } from '../models/type.model';
 
 export default {
   async getAll() {
@@ -10,11 +11,11 @@ export default {
     return await axios.get(`${api.TypeApi}/${id}`);
   },
 
-  async create(data: any) {
+  async create(data: CreateTypeDto) {
     return await axios.post(api.TypeApi, data);
   },
 
-  async update(id: string, data: any) {
+  async update(id: string, data: Partial<CreateTypeDto>) {
     return await axios.patch(`${api.TypeApi}/${id}`, data);
   },
 

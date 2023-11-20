@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as api from './api.service';
+import { CreateProductDto } from '../models/product.model';
 
 export default {
   async getAll() {
@@ -10,11 +11,11 @@ export default {
     return await axios.get(`${api.ProductApi}/${id}`);
   },
 
-  async create(data: any) {
+  async create(data: CreateProductDto) {
     return await axios.post(api.ProductApi, data);
   },
 
-  async update(id: string, data: any) {
+  async update(id: string, data: Partial<CreateProductDto>) {
     return await axios.patch(`${api.ProductApi}/${id}`, data);
   },
 
