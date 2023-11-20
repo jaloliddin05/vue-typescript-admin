@@ -18,8 +18,7 @@ export interface CreateProductDto {
   nameUz: string;
   cost: string;
   address: string;
-  date: string;
-  url?: File;
+  url?: any[] | File | FileList | null | undefined;
   type: string;
 }
 

@@ -4,31 +4,39 @@ import { CreateProductDto } from '../../models/product.model';
 
 const actions = {
   async getAll({ commit }: { commit: Commit }) {
-    const products = await productService.getAll();
-    commit('getProducts', products);
+    const { data } = await productService.getAll();
+    commit('getProducts', data);
   },
 
   async getOne({ commit }: { commit: Commit }, id: string) {
-    const product = await productService.getOne(id);
-    commit('getProductDetail', product);
+    const { data } = await productService.getOne(id);
+    commit('getProductDetail', data);
   },
 
-  async create({ commit }: { commit: Commit }, data: CreateProductDto) {
-    const product = await productService.create(data);
-    commit('setNewProduct', product.data);
+  async create({ commit }: { commit: Commit }, createData: CreateProductDto) {
+    const { data } = await productService.create(createData);
+    commit('setNewProduct', data);
   },
 
   async update(
     { commit }: { commit: Commit },
-    { id, data }: { id: string; data: Partial<CreateProductDto> }
+    { id, data: updateData }: { id: string; data: Partial<CreateProductDto> }
   ) {
-    const product = await productService.update(id, data);
-    commit('updateProduct', product.data);
+    const { data } = await productService.update(id, updateData);
+    commit('updateProduct', data);
   },
 
   async remove({ commit }: { commit: Commit }, id: string) {
     await productService.deleteOne(id);
     commit('removeProduct', id);
+  },
+
+  changeCreateModalVisible({ commit }: { commit: Commit }, bool: boolean) {
+    commit('changeCreateModalVisible', bool);
+  },
+
+  changeUpdateModalVisible({ commit }: { commit: Commit }, bool: boolean) {
+    commit('changeUpdateModalVisible', bool);
   },
 };
 
