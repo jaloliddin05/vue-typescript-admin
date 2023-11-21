@@ -1,8 +1,5 @@
 <template>
     <div v-if="typeDetail">
-        <form-dialog :showDialog="typeUpdateModal" @changeDialogVisible="changeDialogvisible">
-            <TypeUpdateForm :typeDetail="typeDetail"></TypeUpdateForm>
-        </form-dialog>
         <q-item class="z-top">
             <q-item-section>
                 {{ typeDetail?.nameUz }}
@@ -32,7 +29,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapActions, mapState } from 'vuex';
-import TypeUpdateForm from './TypeUpdateForm.vue';
 import { Type as TypeModel } from '../../models'
 import { useStore } from 'src/store';
 
@@ -53,12 +49,14 @@ export default defineComponent({
         },
         ...mapActions({
             remove: 'type/remove',
+            getOne: 'type/getOne',
             changeUpdateModalVisible: 'type/changeUpdateModalVisible'
         }),
         async deleteItem() {
             await this.remove(this.typeDetail?.id)
         },
-        changeDialogvisible(bool: boolean) {
+        async changeDialogvisible(bool: boolean) {
+            await this.getOne(this.typeDetail?.id)
             this.changeUpdateModalVisible(bool)
         }
     },
@@ -66,10 +64,6 @@ export default defineComponent({
         ...mapState({
             typeUpdateModal: (state: any) => state.type.typeUpdateModal
         })
-    },
-    components: {
-        TypeUpdateForm
     }
-
 })
 </script>

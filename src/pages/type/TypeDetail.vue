@@ -5,6 +5,10 @@
       <TypeItem :type-detail="typeDetail"></TypeItem>
     </q-list>
   </div>
+
+  <form-dialog :showDialog="typeUpdateModal" @changeDialogVisible="changeUpdateDialogvisible">
+    <TypeUpdateForm></TypeUpdateForm>
+  </form-dialog>
 </template>
 
 <script lang="ts">
@@ -12,10 +16,12 @@ import { defineComponent, ref } from 'vue';
 import { mapActions, mapState } from 'vuex';
 import { useStore } from 'src/store';
 import TypeItem from 'src/components/type/TypeItem.vue';
+import TypeUpdateForm from 'src/components/type/TypeUpdateForm.vue';
 
 export default defineComponent({
   components: {
-    TypeItem
+    TypeItem,
+    TypeUpdateForm
   },
   setup() {
     const store = useStore()
@@ -23,12 +29,17 @@ export default defineComponent({
   },
   methods: {
     ...mapActions({
-      getOne: 'type/getOne'
-    })
+      getOne: 'type/getOne',
+      changeUpdateModalVisible: 'type/changeUpdateModalVisible'
+    }),
+    changeUpdateDialogvisible(bool: boolean) {
+      this.changeUpdateModalVisible(bool)
+    }
   },
   computed: {
     ...mapState({
-      typeDetail: (state: any) => state.type.typeDetail
+      typeDetail: (state: any) => state.type.typeDetail,
+      typeUpdateModal: (state: any) => state.type.typeUpdateModal
     })
   },
   async mounted() {

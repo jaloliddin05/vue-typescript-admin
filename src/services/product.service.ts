@@ -11,6 +11,10 @@ export default {
     return await axios.get(`${api.ProductApi}/${id}`);
   },
 
+  async getByType(id: string) {
+    return await axios.get(`${api.ProductApi}/type/${id}`);
+  },
+
   async create(data: CreateProductDto) {
     return await axios.post(api.ProductApi, data);
   },

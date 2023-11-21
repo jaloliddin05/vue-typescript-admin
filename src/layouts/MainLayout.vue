@@ -8,7 +8,7 @@
     </q-header>
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Task Links </q-item-label>
 
         <SidebarLink v-for="link in sidebarLinks" :key="link.title" v-bind="link" />
       </q-list>

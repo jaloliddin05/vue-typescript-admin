@@ -12,9 +12,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { useStore } from 'src/store';
-import { Type } from 'src/models'
 import { CreateTypeDto } from 'src/models/type.model';
 
 export default defineComponent({
@@ -29,11 +28,6 @@ export default defineComponent({
 
         return { store, form }
     },
-    props: {
-        typeDetail: {
-            type: Object as () => Type
-        }
-    },
     methods: {
         ...mapActions({
             update: 'type/update',
@@ -43,6 +37,11 @@ export default defineComponent({
             await this.update({ id: this.typeDetail?.id, data: this.form })
             this.changeUpdateModalVisible(false)
         }
+    },
+    computed: {
+        ...mapState({
+            typeDetail: (state: any) => state.type.typeDetail
+        })
     },
     mounted() {
         this.form.nameUz = this.typeDetail?.nameUz

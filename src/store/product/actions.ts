@@ -13,6 +13,11 @@ const actions = {
     commit('getProductDetail', data);
   },
 
+  async getByType({ commit }: { commit: Commit }, id: string) {
+    const { data } = await productService.getByType(id);
+    commit('getProducts', data);
+  },
+
   async create({ commit }: { commit: Commit }, createData: CreateProductDto) {
     const { data } = await productService.create(createData);
     commit('setNewProduct', data);
